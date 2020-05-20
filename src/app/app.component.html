@@ -1,0 +1,29 @@
+<!-- nav // Implemented by https://github.com/gbosetti -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Mercado Popular</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <!--<li class="nav-item active">
+            <a class="nav-link" href="#" (click)="myData()"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Mis datos personales<span class="sr-only">(current)</span></a>
+          </li>-->
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" routerLink="/"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" routerLink="/orders"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Mis pedidos</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" (click)="logout()"><i class="fa fa-power-off" aria-hidden="true"></i> Cerrar sesión</a>
+          </li>
+        </ul>
+      </div>
+</nav>
+
+<!-- main app container -->
+<div main role="main" class="container" style="margin-top: 40px">
+    <router-outlet></router-outlet>
+</div>
+

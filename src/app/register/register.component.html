@@ -1,0 +1,96 @@
+<div class="jumbotron">
+  <div class="container">
+    <div id="login">
+		    <div class="container">
+		        <div id="login-row" class="row justify-content-center align-items-center">
+		            <div id="login-column" class="col-md-10">
+		                <div id="login-box" class="col-md-12">
+				            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+				                <div class="form-group">
+				                    <label for="firstName">Nombre</label>
+				                    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+				                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+				                        <div *ngIf="f.firstName.errors.required">El nombre es un campo obligatorio</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="lastName">Apellido</label>
+				                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+				                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+				                        <div *ngIf="f.lastName.errors.required">El apellido es un campo obligatorio</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="username">DNI (sin puntos)</label>
+				                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+				                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+				                        <div *ngIf="f.username.errors.required">El DNI es un campo obligatorio</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="email">E-mail</label>
+				                    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+				                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+				                        <div *ngIf="f.email.errors.required">El e-mail es un campo obligatorio</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="phone">Teléfono</label>
+				                    <input type="text" formControlName="phone" placeholder="+54 9 380 44..." class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+				                    <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+				                        <div *ngIf="f.phone.errors.required">El teléfono es un campo obligatorio</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="domicilio">Domicilio</label>
+				                    <input type="text" formControlName="domicilio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.domicilio.errors }" />
+				                    <div *ngIf="submitted && f.domicilio.errors" class="invalid-feedback">
+				                        <div *ngIf="f.domicilio.errors.required">El domicilio es un campo obligatorio</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="referencia">Referencia del inmueble</label>
+				                    <input type="text" formControlName="referencia" placeholder="Ej. rejas negras" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.referencia.errors }" />
+				                    <div *ngIf="submitted && f.referencia.errors" class="invalid-feedback">
+				                        <div *ngIf="f.referencia.errors.required">Por favor, infique una referencia de sucasa</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="barrio">Barrio</label>
+				                    <input type="text" formControlName="barrio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.barrio.errors }" />
+				                    <div *ngIf="submitted && f.barrio.errors" class="invalid-feedback">
+				                        <div *ngIf="f.barrio.errors.required">El barrio es un campo obligatorio</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="localidad">Localidad</label>
+				                    <input type="text" formControlName="localidad" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.localidad.errors }" />
+				                    <div *ngIf="submitted && f.localidad.errors" class="invalid-feedback">
+				                        <div *ngIf="f.localidad.errors.required">La localidad es un campo obligatorio</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <label for="password">Contraseña (4 a 8 caracteres)</label>
+				                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+				                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+				                        <div *ngIf="f.password.errors.required">La contraseña es un campo obligatorio</div>
+				                        <div *ngIf="f.password.errors.minlength">La contraseña debe tener al menos 6 caracteres</div>
+				                        <div *ngIf="f.password.errors.maxlength">La contraseña debe tener alo sumo 8 caracteres</div>
+				                    </div>
+				                </div>
+				                <div class="form-group">
+				                    <a routerLink="/login" class="btn btn-link">Cancelar</a>
+				                    <button [disabled]="loading" class="btn btn-primary float-right">
+				                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+				                        Registrarse
+				                    </button>
+				                </div>
+				            </form>
+				        </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+  </div>
+</div>
+		
