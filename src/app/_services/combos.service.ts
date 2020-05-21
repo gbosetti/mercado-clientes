@@ -13,8 +13,6 @@ export class CombosService {
 
     createPedido(dni, pedidosPorCombo, id_any_combo, combo_len){
 
-        console.log(dni, pedidosPorCombo, id_any_combo, combo_len);
-
         var formData = new FormData();
             formData.append("id_cliente", dni);
             formData.append("datos", pedidosPorCombo);

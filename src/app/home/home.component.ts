@@ -82,13 +82,14 @@ export class HomeComponent implements OnInit {
 	        }
 	    },
 	    callback: (result) => {
-	    	if(result)
+	    	if(result){
 		        this.combosService.createPedido(dni, combos, id_combo, combos_length).then((msg: any) =>{ 
 				   bootbox.alert({ message: msg });
 				   this.clearMyCart();
 				}, msg =>{
 				   bootbox.alert({ message: msg })
 				});
+		    }
 	    }
 	});
   }
