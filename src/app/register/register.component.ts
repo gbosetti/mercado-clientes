@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UserService } from '../_services/user.service';
 import { AuthenticationService } from '../_services/authentication.service';
-
+declare var bootbox: any;
 
 @Component({
   selector: 'app-register',
@@ -61,11 +61,11 @@ export class RegisterComponent implements OnInit {
         this.userService.register(this.registerForm.value).then(
             data => {
                 this.router.navigate(['/login']).then(()=>{
-                  alert('Se ha registrado correctamente.');
+                  bootbox.alert({ message: 'Se ha registrado correctamente.' });
                 });
             },
             error => {
-                alert(error);
+                bootbox.alert({ message: error });
                 this.loading = false;
             }
         );

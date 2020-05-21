@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     AngularFontAwesomeModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ {provide: LocationStrategy, useClass: HashLocationStrategy} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

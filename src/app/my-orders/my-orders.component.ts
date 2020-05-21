@@ -23,7 +23,7 @@ export class MyOrdersComponent implements OnInit {
   createOrder(order){
 
   	var detalle = '';
-  	order.combos_del_pedido.forEach(combo =>{
+  	(order.combos_del_pedido).forEach(combo =>{
   		detalle = detalle + combo.nombre_combo + " (" + combo.cantidad + "x$" + combo.precio_individual + ")<br/>";
   	});
 
@@ -38,16 +38,15 @@ export class MyOrdersComponent implements OnInit {
 
   loadOrders(){
 
+  	$('#overlay-spinner').fadeIn();
   	this.combosService.getOrders(this.getCurrentDni()).then((orders: Array<any>)=>{
 
   		$("#my-orders").html('');
-  		console.log(orders);
     	orders.forEach(order => {
         	$("#my-orders").append(this.createOrder(order));
         });
+        $('#overlay-spinner').fadeOut();
   	});
-
-  	$("my-combos")
   }
 
 }

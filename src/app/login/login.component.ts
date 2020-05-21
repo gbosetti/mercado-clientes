@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services/authentication.service';
+declare var bootbox: any;
 
 @Component({
   selector: 'app-login',
@@ -44,11 +45,10 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        console.log('from the form: ', this.f.username.value, this.f.password.value);
-        this.authenticationService.login(this.f.username.value, this.f.password.value).then(userData => {
+        this.authenticationService.login(this.f.username.value.trim(), this.f.password.value).then(userData => {
             this.router.navigate(['/home']);
         }, errorMessage => {
-            alert(errorMessage);
+            bootbox.alert({ message: errorMessage });
             this.loading = false;
         });
     }

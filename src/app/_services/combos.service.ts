@@ -11,13 +11,15 @@ export class CombosService {
 
     constructor(private http: HttpClient) {}
 
-    createPedido(dni, pedidosPorCombo, id_any_combo, length){
+    createPedido(dni, pedidosPorCombo, id_any_combo, combo_len){
+
+        console.log(dni, pedidosPorCombo, id_any_combo, combo_len);
 
         var formData = new FormData();
             formData.append("id_cliente", dni);
             formData.append("datos", pedidosPorCombo);
             formData.append("id_combo_envia", id_any_combo); // Cualquier id de combo pedido, parece que es para saber el circuito...
-            formData.append("item", length); // Parece que es la cantidad de elementos en el array
+            formData.append("item", combo_len); // Parece que es la cantidad de elementos en el array
 
         return new Promise((resolve, reject) => {
 

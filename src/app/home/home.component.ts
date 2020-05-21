@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CombosService } from '../_services/combos.service';
 import { AuthenticationService } from '../_services/authentication.service';
-
+declare var bootbox: any;
 
 @Component({
   selector: 'app-home',
@@ -19,17 +19,26 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+  	this.initSelectedCombos();
   	this.loadCircuits(); 
   	this.loadCategories(); 
-  	$("#circuit").on("click", ()=>{ this.loadCombos() });
-  	$("#categories").on("click", ()=>{ this.loadCombos() });
+  	$("#circuit").on("change", ()=>{ this.loadCombos(); this.initSelectedCombos(); });
+  	$("#categories").on("change", ()=>{ this.loadCombos() });
   	$("#combos").on("click", ".add-to-cart", (evt)=>{ this.addToCart($(evt.target)) });
   	$(".combos-pedidos").on("click", ".remove-from-cart", (evt)=>{ evt.target.parentElement.parentElement.remove() });
   	$("#registerOrder").on("click", (evt)=>{ this.registerOrder(); });
   	
   }
 
+  initSelectedCombos(){
+
+  	$(".combos-pedidos").html("Aún no agregó combos a su carrito.");
+  }
+
   addToCart(target){
+
+  	if($(".combos-pedidos li").length<=0)
+  		$(".combos-pedidos").html('');
 
   	var combo = $(`<li data-id="${target.attr("id")}" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 		<div class="d-flex w-100 justify-content-between">
@@ -45,31 +54,48 @@ export class HomeComponent implements OnInit {
 
   registerOrder(){
 
-  	var combos = "", id_combo, combos_length=0;
+  	var combos = "", id_combo, combos_length=1;
   	$(".combos-pedidos li").each((id, combo: any) => {
-  		console.log(combo);
-  		combos = combos + '{"id_combo":' + combo.getAttribute("data-id") + ', "cantidad": 1 }]';
+  		combos = combos + '{"id_combo":' + combo.getAttribute("data-id") + ', "cantidad": 1 }] ';
   		id_combo = combo.getAttribute("data-id");
-  		combos_length =+1;
+  		combos_length = combos_length + 1;
   	});
 
   	var dni = this.getCurrentDni();
 
 	if(dni == undefined || id_combo == undefined){
-	  alert("Por favor, completar todos lso campos requeridos para efectuar el pedido.");
+	  bootbox.alert({ message: "Por favor, completar todos los campos requeridos para efectuar el pedido." });
 	  return false;
 	}
 
-	this.combosService.createPedido(dni, combos, id_combo, combos_length).then((msg: any) =>{ 
-	   alert(msg);
-	}, msg =>{
-	   alert(msg);
-	}).finally(()=>{ this.clearMyCart(); });
+	bootbox.confirm({
+		title: "Advertencia",
+	    message: "Una vez registrado, el pedido no puede ser modificado ni cancelado. ¿Estas seguro de querer registrar el pedido?",
+	    buttons: {
+	        confirm: {
+	            label: '<i class="fa fa-check" aria-hidden="true"></i> Si',
+	            className: 'btn-primary'
+	        },
+	        cancel: {
+	            label: '<i class="fa fa-times" aria-hidden="true"></i> No',
+	            className: 'btn-secondary'
+	        }
+	    },
+	    callback: (result) => {
+	    	if(result)
+		        this.combosService.createPedido(dni, combos, id_combo, combos_length).then((msg: any) =>{ 
+				   bootbox.alert({ message: msg });
+				   this.clearMyCart();
+				}, msg =>{
+				   bootbox.alert({ message: msg })
+				});
+	    }
+	});
   }
 
   clearMyCart(){
 
-  	$(".combos-pedidos").html("");
+  	$(".combos-pedidos").html("Su pedido ha sido registrado.");
   }
 
   loadCategories(){
@@ -106,6 +132,8 @@ export class HomeComponent implements OnInit {
   }
 
   loadCombos(){
+
+  	$('#overlay-spinner').fadeIn();
       var formattedData = [];
       var circuito = $("#circuit").val();
       if (circuito == null) return;
@@ -125,6 +153,7 @@ export class HomeComponent implements OnInit {
         	$("#combos").append(this.createCombo(e));
         	
         });
+        $('#overlay-spinner').fadeOut();
       });
     }
 
