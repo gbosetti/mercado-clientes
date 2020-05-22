@@ -31,6 +31,26 @@ export class LoginComponent implements OnInit {
 
 		this.returnUrl = '/'; //this.route.snapshot.queryParams['returnUrl'] || '/';
 		$('input:text:visible:first').focus();
+		$('.recover-pass').on('click', ()=>{ this.recoverPass() });
+	}
+
+	recoverPass(){
+
+		var dni = this.f.username.value.trim();
+		if (dni == undefined || dni == ''){
+			bootbox.alert({ message: "Por favor, ingrese su DNI e intente nuevamente." });
+		}
+		else {
+			$('#overlay-spinner').fadeIn();
+			this.authenticationService.recoverPass(dni).then(msg=>{
+				$('#overlay-spinner').fadeOut();
+				bootbox.alert({ message: msg });
+			}, errorMessage => {
+				$('#overlay-spinner').fadeOut();
+	            bootbox.alert({ message: errorMessage });
+	            this.loading = false;
+	        });
+		}
 	}
 
 	// convenience getter for easy access to form fields

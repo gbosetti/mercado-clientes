@@ -40,8 +40,7 @@ export class RegisterComponent implements OnInit {
             domicilio: ['', Validators.required],
             barrio: ['', Validators.required],
             localidad: ['', Validators.required],
-            referencia: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(8)]]
+            referencia: ['', Validators.required]
         });
         $('input:text:visible:first').focus();
     }

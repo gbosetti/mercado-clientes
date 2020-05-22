@@ -83,20 +83,20 @@ export class HomeComponent implements OnInit {
 	    },
 	    callback: (result) => {
 	    	if(result){
-		        this.combosService.createPedido(dni, combos, id_combo, combos_length).then((msg: any) =>{ 
-				   bootbox.alert({ message: msg });
-				   this.clearMyCart();
-				}, msg =>{
-				   bootbox.alert({ message: msg })
-				});
+  		    this.combosService.createPedido(dni, combos, id_combo, combos_length).then((msg: any) =>{ 
+  				   bootbox.alert({ message: msg });
+  				   this.clearMyCart(msg);
+  				}, msg =>{
+  				   bootbox.alert({ message: msg })
+  				});
 		    }
 	    }
 	});
   }
 
-  clearMyCart(){
+  clearMyCart(msg){
 
-  	$(".combos-pedidos").html("Su pedido ha sido registrado.");
+  	$(".combos-pedidos").html(msg);
   }
 
   loadCategories(){

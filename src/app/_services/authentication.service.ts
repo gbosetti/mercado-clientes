@@ -20,6 +20,35 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
+    recoverPass(dni) {
+        var formData = new FormData();
+            formData.append("dni", dni);
+
+        return new Promise((resolve, reject) => {
+
+            $.ajax({
+                url: environment.apiUrl+'recover_user_pass.php',
+                type: 'post',
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                    var res = JSON.parse(data);
+                    if(res["error"]==false){
+                        resolve(res["message"]);
+                    }
+                    else{
+                        reject(res["message"]);
+                    }
+                },
+                "error": function (request, status) {
+                    reject(request.responseText);
+                },
+                data: formData
+            });
+        });
+    }
+
     login(dni, password) {
 
         var formData = new FormData();

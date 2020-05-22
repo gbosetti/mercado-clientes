@@ -31,7 +31,7 @@
 				                    <label for="email">E-mail</label>
 				                    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
 				                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-				                        <div *ngIf="f.email.errors.required">El e-mail es un campo obligatorio</div>
+				                        <div *ngIf="f.email.errors.required">El e-mail es un campo obligatorio. Aquí recibirás tu contraseña</div>
 				                    </div>
 				                </div>
 				                <div class="form-group">
@@ -70,13 +70,7 @@
 				                    </div>
 				                </div>
 				                <div class="form-group">
-				                    <label for="password">Contraseña (4 a 8 caracteres)</label>
-				                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-				                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-				                        <div *ngIf="f.password.errors.required">La contraseña es un campo obligatorio</div>
-				                        <div *ngIf="f.password.errors.minlength">La contraseña debe tener al menos 6 caracteres</div>
-				                        <div *ngIf="f.password.errors.maxlength">La contraseña debe tener alo sumo 8 caracteres</div>
-				                    </div>
+				                    <label for="password">Una vez registrado, recibirás tu contraseña en el mail especificado.</label>
 				                </div>
 				                <div class="form-group">
 				                    <a routerLink="/login" class="btn btn-link">Cancelar</a>

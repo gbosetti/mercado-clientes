@@ -18,7 +18,6 @@ export class UserService {
             formData.append("dni", user.username);
             formData.append("mail", user.email);
             formData.append("nro_cel", user.phone);
-            formData.append("clave", user.password);
             formData.append("direccion", user.domicilio);
             formData.append("referencia", user.referencia);
             formData.append("barrio", user.barrio);
